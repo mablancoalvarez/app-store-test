@@ -7,9 +7,16 @@ const ProductsList = () => {
     const [inputValue, setInputValue] = useState("");
 
     useEffect(() => {
-        fetch(URL_BASE)
-            .then(response => response.json())
-            .then(data => setProducts(data));
+        const fetchData = async () => {
+            try {
+                const response = await fetch(URL_BASE);
+                const data = await response.json();
+                setProducts(data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchData();
     }, []);
 
     const lowerCaseInputValue = inputValue.toLowerCase();

@@ -95,3 +95,17 @@
 .card .button:hover {
   background-color: #ea7961;
 }
+
+/*----------*/
+.product-details {
+  & .product-details-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  & .product-details-info {
+    & ul {
+      list-style: none;
+    }
+  }
+}
