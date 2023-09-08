@@ -19,7 +19,7 @@ const ProductDetails = () => {
         return (
             <>
                 <div>
-                    <select name="color">
+                    <select name="color" className="color">
                         {options?.colors?.map((item, index) => (
                             <option key={index} value={item.code}>{item.name}</option>
                         ))}
@@ -56,11 +56,6 @@ const ProductDetails = () => {
                         <li>{weight}</li>
                     </ul>
                     <Selectors />
-                    {/* <div>
-                        {product.options.map((option) => {
-                            <select name={option} id={`product-${option}}`}>{ }</select>
-                        })}
-                    </div> */}
                 </div>
             </div>
         </div>

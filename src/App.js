@@ -7,7 +7,7 @@ import ProductDetails from './screens/ProductDetails';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App ly-main">
       <Header />
       <Routes>
         <Route path='/' element={<ProductsList />} />

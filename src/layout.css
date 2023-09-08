@@ -1,0 +1,26 @@
+.ly-main {
+  --ly-maxWidth: 1036px;
+  --ly-mainColumns: 1fr minmax(300px, var(--ly-maxWidth)) 1fr;
+
+  display: grid;
+  grid-template-columns: var(--ly-mainColumns);
+  column-gap: 24px;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+.ly-main > * {
+  grid-column: 2;
+  align-content: start;
+}
+.ly-main > .is-center {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 524px) 1fr;
+  grid-row-gap: 24px;
+  align-content: center;
+  padding-top: 24px;
+  padding-bottom: 24px;
+
+  & > * {
+    grid-column-start: 2;
+  }
+}
