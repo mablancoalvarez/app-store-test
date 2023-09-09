@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import { URL_BASE } from "../api/api";
+import { useContext } from "react";
+import { DataContext } from "../context/DataContext";
 
 const ProductDetails = () => {
     const { id } = useParams();
@@ -10,6 +12,7 @@ const ProductDetails = () => {
         colors: '',
         storages: ''
     });
+    const { setData, setValues } = useContext(DataContext);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -25,7 +28,6 @@ const ProductDetails = () => {
         fetchData();
     }, [id]);
 
-    console.log("optionsSelect", optionsSelect)
     const setDefaultOptions = (options) => {
         const setDefaultOption = (name) => {
             if (options && options[name] && options[name].length > 0 && !optionsSelect[name]) {
@@ -49,7 +51,15 @@ const ProductDetails = () => {
     };
 
 
-    const onHandleClick = async () => {
+    function handleClick() {
+        // const timestamp = Date.now(); // Obtener la marca de tiempo actual
+        // localStorage.setItem("buttonTimestamp", timestamp); // Almacenar la marca de tiempo en localStorage
+
+        sendData();
+
+    }
+
+    async function sendData() {
         try {
             const response = await fetch('https://itx-frontend-test.onrender.com/api/cart', {
                 method: 'POST',
@@ -63,12 +73,33 @@ const ProductDetails = () => {
                 })
             });
             const data = await response.json();
-            console.log(data);
+
+            const cartCountArray = JSON.parse(localStorage.getItem("cartCount")) || [];
+            const newCartItem = {
+                id: id,
+                color: optionsSelect["colors"],
+                storage: optionsSelect["storages"],
+                count: data.count
+            };
+
+            const idExists = cartCountArray.some((item) => item.id === id);
+            if (!idExists) {
+                cartCountArray.push(newCartItem);
+            }
+
+            localStorage.setItem("cartCount", JSON.stringify(cartCountArray));
+            setData(cartCountArray);
+            setValues({ id: id, color: optionsSelect["colors"], storage: optionsSelect["storages"] });
+
+            setTimeout(() => {
+                const updatedCartCountArray = cartCountArray.filter((item) => item.id !== id);
+                localStorage.setItem("cartCount", JSON.stringify(updatedCartCountArray));
+                sendData(); // Llamada recursiva después de una hora
+            }, 60 * 60 * 1000); s
         } catch (error) {
-            console.log(error)
+
         }
     }
-
 
     const { brand, model, price, cpu, ram, os, displayResolution, battery, primaryCamera, secondaryCamera, dimensions, weight } = product;
     const { colors, storages } = optionsSelect;
@@ -109,7 +140,7 @@ const ProductDetails = () => {
                                 ))}
                             </select>
                         </div>
-                        <button onClick={onHandleClick}>Add to cart</button>
+                        <button onClick={handleClick}>Add to cart</button>
                     </div>
                 </div>
             </div>
