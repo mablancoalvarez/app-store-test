@@ -11,7 +11,7 @@ export const DataProvider = ({ children }) => {
 
     console.log("getCartCountFromStore", getCartCountFromStore);
 
-    const [data, setData] = useState(getCartCountFromStore);
+    const [data, setData] = useState(getCartCountFromStore || null);
     const [values, setValues] = useState({});
 
 

@@ -51,15 +51,12 @@ const ProductDetails = () => {
     };
 
 
-    function handleClick() {
-        // const timestamp = Date.now(); // Obtener la marca de tiempo actual
-        // localStorage.setItem("buttonTimestamp", timestamp); // Almacenar la marca de tiempo en localStorage
-
-        sendData();
-
+    const handleClick = () => {
+        const { colors, storages } = optionsSelect;
+        sendData(id, colors, storages);
     }
 
-    async function sendData() {
+    const sendData = async (id, colors, storages) => {
         try {
             const response = await fetch('https://itx-frontend-test.onrender.com/api/cart', {
                 method: 'POST',
@@ -68,38 +65,39 @@ const ProductDetails = () => {
                 },
                 body: JSON.stringify({
                     id: id,
-                    colorCode: optionsSelect["colors"],
-                    storageCode: optionsSelect["storages"],
+                    colorCode: colors,
+                    storageCode: storages,
                 })
             });
             const data = await response.json();
 
             const cartCountArray = JSON.parse(localStorage.getItem("cartCount")) || [];
-            const newCartItem = {
-                id: id,
-                color: optionsSelect["colors"],
-                storage: optionsSelect["storages"],
-                count: data.count
-            };
+            const existingItemIndex = cartCountArray.findIndex((item) => item.id === id);
 
-            const idExists = cartCountArray.some((item) => item.id === id);
-            if (!idExists) {
-                cartCountArray.push(newCartItem);
+            if (existingItemIndex !== -1) {
+                cartCountArray[existingItemIndex].count = data.count;
+                cartCountArray[existingItemIndex].lastClicked = new Date().getTime();
+            } else {
+                cartCountArray.push({
+                    id: id,
+                    color: colors,
+                    storage: storages,
+                    count: data.count,
+                    lastClicked: new Date().getTime(),
+                });
             }
 
             localStorage.setItem("cartCount", JSON.stringify(cartCountArray));
             setData(cartCountArray);
-            setValues({ id: id, color: optionsSelect["colors"], storage: optionsSelect["storages"] });
-
+            setValues({ id: id, color: colors, storage: storages });
             setTimeout(() => {
-                const updatedCartCountArray = cartCountArray.filter((item) => item.id !== id);
-                localStorage.setItem("cartCount", JSON.stringify(updatedCartCountArray));
-                sendData(); // Llamada recursiva después de una hora
-            }, 60 * 60 * 1000); s
+                sendData(id, colors, storages);
+            }, 60 * 60 * 1000);
         } catch (error) {
-
+            console.log("error", error);
         }
     }
+
 
     const { brand, model, price, cpu, ram, os, displayResolution, battery, primaryCamera, secondaryCamera, dimensions, weight } = product;
     const { colors, storages } = optionsSelect;
