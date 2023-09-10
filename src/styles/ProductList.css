@@ -3,6 +3,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    & h1 {
+      font-size: 18px;
+      line-height: 28px;
+      letter-spacing: 0.3px;
+      margin: 20px;
+    }
   }
 }
 .products ul {
@@ -49,7 +55,10 @@
 
 .product-container {
   position: relative;
-  padding: var(--size-4);
+  border: 1px solid black;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
 }
 
 .card {
@@ -63,9 +72,11 @@
 
 .title {
   position: relative;
-  font-weight: 600;
-  font-size: 21px;
-  letter-spacing: 1px;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  font-weight: 500;
   margin-top: var(--size-3);
 }
 .photo {

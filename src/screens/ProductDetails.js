@@ -72,7 +72,7 @@ const ProductDetails = () => {
             const data = await response.json();
 
             const cartCountArray = JSON.parse(localStorage.getItem("cartCount")) || [];
-            const existingItemIndex = cartCountArray.findIndex((item) => item.id === id);
+            const existingItemIndex = cartCountArray.findIndex((item) => item.id === id && item.color === colors && item.storage === storages);
 
             if (existingItemIndex !== -1) {
                 cartCountArray[existingItemIndex].count = data.count;
@@ -104,14 +104,14 @@ const ProductDetails = () => {
 
     return (
         <div className="product-details">
-            <h1>Product Detail {id}</h1>
+            <h1>{id}</h1>
             <div className="product-details-content">
                 <img src={product.imgUrl} alt="Product"></img>
                 <div className="product-details-info">
                     <ul>
                         <li>{brand}</li>
+                        <li>{price}$</li>
                         <li>{model}</li>
-                        <li>{price}</li>
                         <li>{cpu}</li>
                         <li>{ram}</li>
                         <li>{os}</li>
@@ -124,21 +124,29 @@ const ProductDetails = () => {
                         <li>{dimensions}</li>
                         <li>{weight}</li>
                     </ul>
+                    <hr className="product-details-separator"></hr>
                     <div className="product-details-actions">
                         <div className="product-details-selectors">
-                            <select name="colors" className="color" value={colors} onChange={handleOnChange}>
-                                {product.options?.colors?.map((item, index) => (
-                                    <option value={item.name} key={index}>{item.name}</option>
-                                ))}
-                            </select>
+                            <div>
+                                <p className="product-details-selectors-title">Color</p>
+                                <select name="colors" className="color" value={colors} onChange={handleOnChange}>
 
-                            <select name="storages" value={storages} onChange={handleOnChange}>
-                                {product.options?.storages?.map((item, index) => (
-                                    <option value={item.name} key={index}>{item.name}</option>
-                                ))}
-                            </select>
+                                    {product.options?.colors?.map((item, index) => (
+                                        <option value={item.name} key={index}>{item.name}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div>
+                                <p className="product-details-selectors-title">Storage</p>
+                                <select name="storages" value={storages} onChange={handleOnChange}>
+
+                                    {product.options?.storages?.map((item, index) => (
+                                        <option value={item.name} key={index}>{item.name}</option>
+                                    ))}
+                                </select>
+                            </div>
                         </div>
-                        <button onClick={handleClick}>Add to cart</button>
+                        <button className="product-details-button" onClick={handleClick}>Add to cart</button>
                     </div>
                 </div>
             </div>
