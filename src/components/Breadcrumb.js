@@ -14,11 +14,12 @@ const Breadcrumb = () => {
         <nav className="breadcrumbs">
             <ActiveLink to="/">Home</ActiveLink>
             {location.pathname !== '/' &&
-                <ActiveLink to={location.pathname}>
-                    <span> /</span>
-                    <span> Shop</span>
-                </ActiveLink>
-
+                <>
+                    <span> / </span>
+                    <ActiveLink to={location.pathname}>
+                        <span> Shop</span>
+                    </ActiveLink>
+                </>
             }
         </nav >
     );

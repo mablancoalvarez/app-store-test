@@ -3,19 +3,21 @@ import Breadcrumb from './Breadcrumb';
 import { ShoppingBag } from "@phosphor-icons/react";
 import { DataContext } from "../context/DataContext";
 import { useContext } from "react";
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     const { data } = useContext(DataContext);
-    console.log("data", data)
     const totalCount = data && data.reduce((acc, currentVal) => acc + currentVal.count, 0);
 
     return (
         <header>
-            <Logo />
+            <Link to="/">
+                <Logo />
+            </Link>
             <Breadcrumb />
             <div className="cart">
-                <span className="count">{totalCount}</span>
-                <ShoppingBag size={24} weight="light" />
+                {totalCount > 0 && <span className="cart-count">{totalCount}</span>}
+                <ShoppingBag className="cart-icon" size={24} weight="light" />
             </div>
         </header>
     );

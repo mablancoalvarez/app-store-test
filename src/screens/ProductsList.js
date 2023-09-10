@@ -27,25 +27,35 @@ const ProductsList = () => {
         id.toString().includes(lowerCaseInputValue) ||
         model.toLowerCase().includes(lowerCaseInputValue)
     ));
-
     return (
         <main className="products">
             <div className="products__searcher">
                 <h1>Title</h1>
                 <div>
-                    <input type="text" id="search" name="search" className="input-search" onChange={(e) => setInputValue(e.target.value)} value={inputValue} />
+                    <input type="text" id="search" name="search" placeholder="Search" className="input-search" onChange={(e) => setInputValue(e.target.value)} value={inputValue} />
                 </div>
             </div>
             <ul>
                 {filteredProducts.map((item) => {
                     return (
                         <li key={item.id}>
-                            <div className="container">
+                            <div className="product-container">
                                 <div className="card">
-                                    <img src={item.imgUrl} alt="Resep" />
+                                    <div className="photo"><img src={item.imgUrl} alt="product" /></div>
                                     <div className="content">
-                                        <h2 className="title">{item.model}</h2>
-                                        <NavLink to={`/product/${item.id}`}><button className="button">View Details</button></NavLink>
+                                        <div className="feature brand">
+                                            <h1 className="title">{item.brand}</h1>
+                                        </div>
+                                        <div className="feature model">
+                                            <span>{item.model}</span>
+                                        </div>
+                                        <div className="feature price">
+                                            <span>{item.price}$</span>
+                                        </div>
+                                        <NavLink to={`/product/${item.id}`}>
+                                            <div className="feature button">
+                                                <button className="button">View Details</button>
+                                            </div></NavLink>
                                     </div>
                                 </div>
                             </div>
@@ -54,7 +64,6 @@ const ProductsList = () => {
                     );
                 })}
             </ul >
-
         </main >
     );
 
