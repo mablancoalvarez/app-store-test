@@ -101,7 +101,7 @@ const ProductDetails = () => {
 
     const { brand, model, price, cpu, ram, os, displayResolution, battery, primaryCamera, secondaryCamera, dimensions, weight } = product;
     const { colors, storages } = optionsSelect;
-
+    const unavailable = !price ? "unavailable" : "";
     return (
         <div className="product-details">
             <div className="product-details-content">
@@ -109,7 +109,7 @@ const ProductDetails = () => {
                 <div className="product-details-info">
                     <ul>
                         <li className="product-title">{brand} {model}</li>
-                        <li className="product-price">{price ? `${price}$` : "Out of stock"}</li>
+                        <li className={`product-price ${unavailable}`}>{price ? `${price}$` : "Out of stock"}</li>
                         <li>CARACTERISTICAS</li>
                         <div className="product-details-feautres">
                             <li>{cpu}</li>

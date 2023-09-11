@@ -27,6 +27,7 @@ const ProductsList = () => {
         id.toString().includes(lowerCaseInputValue) ||
         model.toLowerCase().includes(lowerCaseInputValue)
     ));
+
     return (
         <main className="products">
             <div className="products__searcher">
@@ -36,16 +37,17 @@ const ProductsList = () => {
                 </div>
             </div>
             <ul>
-                {filteredProducts.map((item) => {
+                {filteredProducts.map(({ id, imgUrl, brand, model, price }) => {
+                    const unavailable = !price ? "unavailable" : "";
                     return (
-                        <li key={item.id}>
+                        <li key={id}>
                             <div className="product-container">
-                                <div className="photo"><img src={item.imgUrl} alt="product" /></div>
+                                <div className="photo"><img src={imgUrl} alt="product" /></div>
                                 <div className="content">
-                                    <h1 className="title">{item.brand}</h1>
-                                    <span className="model">{item.model}</span>
-                                    <span className="price">{item.price ? `${item.price}$` : "Out of stock"}</span>
-                                    <button className="button"><NavLink to={`/product/${item.id}`}>View Details<ArrowRight size={24} /></NavLink></button>
+                                    <h1 className="title">{brand}</h1>
+                                    <span className="model">{model}</span>
+                                    <span className={`price ${unavailable}`}>{price ? `${price}$` : "Out of stock"}</span>
+                                    <button className="button"><NavLink to={`/product/${id}`}>View Details<ArrowRight size={24} /></NavLink></button>
 
                                 </div>
                             </div>
