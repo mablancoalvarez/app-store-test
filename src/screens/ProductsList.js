@@ -33,7 +33,7 @@ const ProductsList = () => {
             <div className="products__searcher">
                 <h1>Vuelta al cole</h1>
                 <div>
-                    <input type="text" id="search" name="search" placeholder="Search" className="input-search" onChange={(e) => setInputValue(e.target.value)} value={inputValue} />
+                    <input type="text" id="search" name="search" placeholder="Search" className="products__searcher-input" onChange={(e) => setInputValue(e.target.value)} value={inputValue} />
                 </div>
             </div>
             <ul>

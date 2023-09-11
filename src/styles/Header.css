@@ -15,6 +15,12 @@ header {
   }
 }
 .breadcrumbs {
+  @media screen and (max-width: 600px) {
+    margin-top: var(--size-4);
+  }
+  & .breadcrumbs__separator {
+    margin: var(--size-2);
+  }
   & a {
     color: black;
     font-weight: 500;

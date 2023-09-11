@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
-import { URL_BASE } from "../api/api";
+import { URL_BASE, URL_POST } from "../api/api";
 import { useContext } from "react";
 import { DataContext } from "../context/DataContext";
 
@@ -12,7 +12,7 @@ const ProductDetails = () => {
         colors: '',
         storages: ''
     });
-    const { setData, setValues } = useContext(DataContext);
+    const { setData } = useContext(DataContext);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -58,7 +58,7 @@ const ProductDetails = () => {
 
     const sendData = async (id, colors, storages) => {
         try {
-            const response = await fetch('https://itx-frontend-test.onrender.com/api/cart', {
+            const response = await fetch(URL_POST, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -89,7 +89,6 @@ const ProductDetails = () => {
 
             localStorage.setItem("cartCount", JSON.stringify(cartCountArray));
             setData(cartCountArray);
-            setValues({ id: id, color: colors, storage: storages });
             setTimeout(() => {
                 sendData(id, colors, storages);
             }, 60 * 60 * 1000);
@@ -99,30 +98,26 @@ const ProductDetails = () => {
     }
 
 
-    const { brand, model, price, cpu, ram, os, displayResolution, battery, primaryCamera, secondaryCamera, dimensions, weight } = product;
+    const { brand, model, price, cpu, ram, os, displayResolution, battery, primaryCamera, secondaryCamera, dimensions, weight, imgUrl } = product;
     const { colors, storages } = optionsSelect;
     const unavailable = !price ? "unavailable" : "";
     return (
         <div className="product-details">
             <div className="product-details__content">
-                <img src={product.imgUrl} alt="Product"></img>
+                <img src={imgUrl} alt="Product"></img>
                 <div className="product-details__info">
                     <ul className="product-details__list">
                         <li className="product-details__title">{brand} {model}</li>
                         <li className={`product-details__price ${unavailable}`}>{price ? `${price}$` : "Out of stock"}</li>
                         <li>CARACTERISTICAS</li>
                         <div className="product-details__features">
-                            <li>{cpu}</li>
-                            <li>{ram}</li>
-                            <li>{os}</li>
-                            <li>{displayResolution}</li>
-                            <li>{battery}</li>
+                            {[cpu, ram, os, displayResolution, battery, dimensions, weight].map((item, index) => (
+                                <li key={index}>{item}</li>
+                            ))}
                             <li>
                                 <p>{primaryCamera}</p>
                                 <p>{secondaryCamera}</p>
                             </li>
-                            <li>{dimensions}</li>
-                            <li>{weight}</li>
                         </div>
                     </ul>
                     <hr className="product-details__separator"></hr>
@@ -131,18 +126,16 @@ const ProductDetails = () => {
                             <div className="product-details__selectors-content">
                                 <p className="product-details__selectors-title">Color</p>
                                 <select name="colors" className="color" value={colors} onChange={handleOnChange}>
-
-                                    {product.options?.colors?.map((item, index) => (
-                                        <option value={item.name} key={index}>{item.name}</option>
+                                    {product.options?.colors?.map((item) => (
+                                        <option value={item.name} key={item.name}>{item.name}</option>
                                     ))}
                                 </select>
                             </div>
                             <div className="product-details__selectors-content">
                                 <p className="product-details__selectors-title">Storage</p>
                                 <select name="storages" value={storages} onChange={handleOnChange}>
-
-                                    {product.options?.storages?.map((item, index) => (
-                                        <option value={item.name} key={index}>{item.name}</option>
+                                    {product.options?.storages?.map((item) => (
+                                        <option value={item.name} key={item.name}>{item.name}</option>
                                     ))}
                                 </select>
                             </div>

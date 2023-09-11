@@ -4,8 +4,6 @@ import ProductsList from "./screens/ProductsList";
 import ProductDetails from './screens/ProductDetails';
 import { DataProvider } from './context/DataContext';
 
-
-
 function App() {
   return (
     <DataProvider>

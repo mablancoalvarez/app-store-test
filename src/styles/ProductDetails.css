@@ -1,9 +1,9 @@
 .product-details {
   & h1 {
     font-size: 18px;
-    line-height: 28px;
+    line-height: var(--size-7);
     letter-spacing: 0.3px;
-    margin: 20px;
+    margin: var(--size-5);
   }
   & img {
     width: 250px;
@@ -23,25 +23,25 @@
     font: inherit;
     font-size: 100%;
     margin: 0;
-    padding: 20px;
+    padding: var(--size-5);
     vertical-align: baseline;
 
     & ul {
       list-style: none;
       padding: 0px;
       color: #121314;
-      font-size: 12px;
-      line-height: 20px;
+      font-size: var(--size-3);
+      line-height: var(--size-5);
       letter-spacing: 0.5px;
       margin-bottom: 2px;
       & .product-details__title {
         font-size: 32px;
-        line-height: 16px;
+        line-height: var(--size-4);
         letter-spacing: 0.8px;
         text-transform: uppercase;
         font-weight: 900;
         color: #373434;
-        margin-bottom: 24px;
+        margin-bottom: var(--size-6);
         @media screen and (max-width: 600px) {
           hyphens: manual;
           max-width: 220px;
@@ -50,10 +50,10 @@
       }
       & .product-details__price {
         color: var(--secondary-color);
-        font-size: 30px;
-        line-height: 16px;
+        font-size: var(--size-8);
+        line-height: var(--size-4);
         font-weight: 900;
-        margin-bottom: 24px;
+        margin-bottom: var(--size-6);
         margin-top: 32px;
       }
       & .unavailable {
@@ -62,43 +62,43 @@
     }
   }
   & .products-details__features > * {
-    margin-bottom: 24px;
+    margin-bottom: var(--size-6);
     color: #121314;
-    font-size: 12px;
-    line-height: 20px;
+    font-size: var(--size-3);
+    line-height: var(--size-5);
     letter-spacing: 0.5px;
     margin-bottom: 2px;
   }
   & .product-details__actions {
-    margin-top: 24px;
+    margin-top: var(--size-6);
   }
   & .product-details__selectors {
     & .product-details__selectors-title {
       text-transform: uppercase;
       font-weight: 400;
-      font-size: 12px;
+      font-size: var(--size-3);
       color: #757575;
-      margin-top: 8px;
-      margin-bottom: 4px;
+      margin-top: var(--size-2);
+      margin-bottom: var(--size-1);
     }
     & .product-details__selectors-content {
-      margin-bottom: 20px;
+      margin-bottom: var(--size-5);
     }
     & select {
       align-items: center;
       display: flex;
       justify-content: center;
       width: 100%;
-      height: 30px;
+      height: var(--size-8);
     }
   }
 
   & .product-details__button {
     width: 100%;
-    margin-top: 8px;
+    margin-top: var(--size-2);
     min-width: 249px;
     height: 40px;
-    padding: 0 20px;
+    padding: 0 var(--size-5);
     color: #fff;
     background-color: var(--secondary-color);
     border: 0;

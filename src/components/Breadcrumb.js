@@ -13,15 +13,16 @@ const Breadcrumb = () => {
     return (
         <nav className="breadcrumbs">
             <ActiveLink to="/">Home</ActiveLink>
-            {location.pathname !== '/' &&
+            {location.pathname !== '/' && (
                 <>
+                    <span className="breadcrumbs__separator">/</span>
                     <ActiveLink to={location.pathname}>
-                        <span> {location.pathname}</span>
+                        <span>{location.pathname.substring(1)}</span>
                     </ActiveLink>
                 </>
-            }
-        </nav >
+            )}
+        </nav>
     );
+};
 
-}
 export default Breadcrumb;
