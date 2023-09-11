@@ -104,14 +104,14 @@ const ProductDetails = () => {
     const unavailable = !price ? "unavailable" : "";
     return (
         <div className="product-details">
-            <div className="product-details-content">
+            <div className="product-details__content">
                 <img src={product.imgUrl} alt="Product"></img>
-                <div className="product-details-info">
-                    <ul>
-                        <li className="product-title">{brand} {model}</li>
-                        <li className={`product-price ${unavailable}`}>{price ? `${price}$` : "Out of stock"}</li>
+                <div className="product-details__info">
+                    <ul className="product-details__list">
+                        <li className="product-details__title">{brand} {model}</li>
+                        <li className={`product-details__price ${unavailable}`}>{price ? `${price}$` : "Out of stock"}</li>
                         <li>CARACTERISTICAS</li>
-                        <div className="product-details-feautres">
+                        <div className="product-details__features">
                             <li>{cpu}</li>
                             <li>{ram}</li>
                             <li>{os}</li>
@@ -125,11 +125,11 @@ const ProductDetails = () => {
                             <li>{weight}</li>
                         </div>
                     </ul>
-                    <hr className="product-details-separator"></hr>
-                    <div className="product-details-actions">
-                        <div className="product-details-selectors">
-                            <div className="product-details-selectors-content">
-                                <p className="product-details-selectors-title">Color</p>
+                    <hr className="product-details__separator"></hr>
+                    <div className="product-details__actions">
+                        <div className="product-details__selectors">
+                            <div className="product-details__selectors-content">
+                                <p className="product-details__selectors-title">Color</p>
                                 <select name="colors" className="color" value={colors} onChange={handleOnChange}>
 
                                     {product.options?.colors?.map((item, index) => (
@@ -137,8 +137,8 @@ const ProductDetails = () => {
                                     ))}
                                 </select>
                             </div>
-                            <div className="product-details-selectors-content">
-                                <p className="product-details-selectors-title">Storage</p>
+                            <div className="product-details__selectors-content">
+                                <p className="product-details__selectors-title">Storage</p>
                                 <select name="storages" value={storages} onChange={handleOnChange}>
 
                                     {product.options?.storages?.map((item, index) => (
@@ -147,7 +147,7 @@ const ProductDetails = () => {
                                 </select>
                             </div>
                         </div>
-                        <button disabled={!price} className="product-details-button" onClick={handleClick}>Add to cart</button>
+                        <button disabled={!price} className="product-details__button" onClick={handleClick}>Add to cart</button>
                     </div>
                 </div>
             </div >

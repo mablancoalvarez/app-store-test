@@ -41,13 +41,13 @@ const ProductsList = () => {
                     const unavailable = !price ? "unavailable" : "";
                     return (
                         <li key={id}>
-                            <div className="product-container">
-                                <div className="photo"><img src={imgUrl} alt="product" /></div>
-                                <div className="content">
-                                    <h1 className="title">{brand}</h1>
-                                    <span className="model">{model}</span>
-                                    <span className={`price ${unavailable}`}>{price ? `${price}$` : "Out of stock"}</span>
-                                    <button className="button"><NavLink to={`/product/${id}`}>View Details<ArrowRight size={24} /></NavLink></button>
+                            <div className="products__product-container">
+                                <div className="products__photo"><img src={imgUrl} alt="product" /></div>
+                                <div className="products__content">
+                                    <h1 className="products__title">{brand}</h1>
+                                    <span className="products__model">{model}</span>
+                                    <span className={`products__price ${unavailable}`}>{price ? `${price}$` : "Out of stock"}</span>
+                                    <button className="products__button"><NavLink to={`/product/${id}`}>View Details<ArrowRight size={24} /></NavLink></button>
 
                                 </div>
                             </div>
