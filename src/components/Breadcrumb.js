@@ -15,9 +15,8 @@ const Breadcrumb = () => {
             <ActiveLink to="/">Home</ActiveLink>
             {location.pathname !== '/' &&
                 <>
-                    <span> / </span>
                     <ActiveLink to={location.pathname}>
-                        <span> Shop</span>
+                        <span> {location.pathname}</span>
                     </ActiveLink>
                 </>
             }

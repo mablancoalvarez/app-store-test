@@ -104,30 +104,31 @@ const ProductDetails = () => {
 
     return (
         <div className="product-details">
-            <h1>{id}</h1>
             <div className="product-details-content">
                 <img src={product.imgUrl} alt="Product"></img>
                 <div className="product-details-info">
                     <ul>
-                        <li>{brand}</li>
-                        <li>{price}$</li>
-                        <li>{model}</li>
-                        <li>{cpu}</li>
-                        <li>{ram}</li>
-                        <li>{os}</li>
-                        <li>{displayResolution}</li>
-                        <li>{battery}</li>
-                        <li>
-                            <p>{primaryCamera}</p>
-                            <p>{secondaryCamera}</p>
-                        </li>
-                        <li>{dimensions}</li>
-                        <li>{weight}</li>
+                        <li className="product-title">{brand} {model}</li>
+                        <li className="product-price">{price ? `${price}$` : "Out of stock"}</li>
+                        <li>CARACTERISTICAS</li>
+                        <div className="product-details-feautres">
+                            <li>{cpu}</li>
+                            <li>{ram}</li>
+                            <li>{os}</li>
+                            <li>{displayResolution}</li>
+                            <li>{battery}</li>
+                            <li>
+                                <p>{primaryCamera}</p>
+                                <p>{secondaryCamera}</p>
+                            </li>
+                            <li>{dimensions}</li>
+                            <li>{weight}</li>
+                        </div>
                     </ul>
                     <hr className="product-details-separator"></hr>
                     <div className="product-details-actions">
                         <div className="product-details-selectors">
-                            <div>
+                            <div className="product-details-selectors-content">
                                 <p className="product-details-selectors-title">Color</p>
                                 <select name="colors" className="color" value={colors} onChange={handleOnChange}>
 
@@ -136,7 +137,7 @@ const ProductDetails = () => {
                                     ))}
                                 </select>
                             </div>
-                            <div>
+                            <div className="product-details-selectors-content">
                                 <p className="product-details-selectors-title">Storage</p>
                                 <select name="storages" value={storages} onChange={handleOnChange}>
 
@@ -146,11 +147,11 @@ const ProductDetails = () => {
                                 </select>
                             </div>
                         </div>
-                        <button className="product-details-button" onClick={handleClick}>Add to cart</button>
+                        <button disabled={!price} className="product-details-button" onClick={handleClick}>Add to cart</button>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 }
 export default ProductDetails;

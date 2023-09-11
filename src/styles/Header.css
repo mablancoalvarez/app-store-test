@@ -8,6 +8,11 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
+  @media screen and (max-width: 600px) {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-auto-flow: column;
+  }
 }
 .breadcrumbs {
   & a {

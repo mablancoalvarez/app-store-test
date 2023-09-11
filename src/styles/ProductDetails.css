@@ -5,6 +5,9 @@
     letter-spacing: 0.3px;
     margin: 20px;
   }
+  & img {
+    width: 250px;
+  }
   & .product-details-content {
     display: flex;
     align-items: flex-start;
@@ -12,12 +15,11 @@
     margin-top: 80px;
     flex-wrap: wrap;
 
-    @media screen and (max-width: 599px) {
+    @media screen and (max-width: 600px) {
       gap: 50px;
     }
   }
   & .product-details-info {
-    border: 1px solid black;
     font: inherit;
     font-size: 100%;
     margin: 0;
@@ -32,17 +34,40 @@
       line-height: 20px;
       letter-spacing: 0.5px;
       margin-bottom: 2px;
-
-      & li:nth-child(1),
-      li:nth-child(2) {
-        font-size: 12px;
+      & .product-title {
+        font-size: 32px;
         line-height: 16px;
         letter-spacing: 0.8px;
         text-transform: uppercase;
-        font-weight: 400;
-        color: #757575;
+        font-weight: 900;
+        color: #373434;
+        margin-bottom: 24px;
+        @media screen and (max-width: 600px) {
+          hyphens: manual;
+          max-width: 220px;
+          line-height: 32px;
+        }
+      }
+      & .product-price {
+        color: var(--secondary-color);
+        font-size: 30px;
+        line-height: 16px;
+        font-weight: 900;
+        margin-bottom: 24px;
+        margin-top: 32px;
       }
     }
+  }
+  & .products-details-features > * {
+    margin-bottom: 24px;
+    color: #121314;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+  }
+  & .product-details-actions {
+    margin-top: 24px;
   }
   & .product-details-selectors {
     & .product-details-selectors-title {
@@ -51,6 +76,10 @@
       font-size: 12px;
       color: #757575;
       margin-top: 8px;
+      margin-bottom: 4px;
+    }
+    & .product-details-selectors-content {
+      margin-bottom: 20px;
     }
     & select {
       align-items: center;
@@ -66,14 +95,17 @@
     min-width: 249px;
     height: 40px;
     padding: 0 20px;
-    color: var(--primary-button);
+    color: #fff;
     background-color: var(--secondary-color);
     border: 0;
     outline: none;
     cursor: pointer;
     font-weight: 600;
     &:hover {
-      background-color: #666;
+      background-color: #d05f47;
+    }
+    &:disabled {
+      background-color: grey;
     }
   }
 }

@@ -8,9 +8,6 @@ export const DataProvider = ({ children }) => {
     const getCartCountFromStore = JSON.parse(localStorage.getItem(
         "cartCount"
     ));
-
-    console.log("getCartCountFromStore", getCartCountFromStore);
-
     const [data, setData] = useState(getCartCountFromStore || null);
     const [values, setValues] = useState({});
 
