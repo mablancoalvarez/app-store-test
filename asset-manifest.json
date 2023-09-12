@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/app-store-test/static/css/main.3199b195.css",
+    "main.js": "/app-store-test/static/js/main.54e3f6ac.js",
+    "static/media/logo.svg": "/app-store-test/static/media/logo.e15daea2142ac8238c32ae7aed44d944.svg",
+    "index.html": "/app-store-test/index.html",
+    "main.3199b195.css.map": "/app-store-test/static/css/main.3199b195.css.map",
+    "main.54e3f6ac.js.map": "/app-store-test/static/js/main.54e3f6ac.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3199b195.css",
+    "static/js/main.54e3f6ac.js"
+  ]
+}
