@@ -56,7 +56,7 @@ const ProductsList = () => {
                     {price ? `${price}$` : 'Out of stock'}
                   </span>
                   <NavLink className="products__link" to={`/product/${id}`}>
-                    <button role="button" className="products__button">
+                    <button aria-label="View Details" role="button" className="products__button">
 
                       View Details
                       <ArrowRight size={24} />

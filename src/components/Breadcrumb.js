@@ -10,7 +10,7 @@ const ActiveLink = ({ to = '/', children, ...props }) => {
 const Breadcrumb = () => {
   const location = useLocation();
   return (
-    <nav className="breadcrumbs">
+    <nav role="navigation" className="breadcrumbs">
       <ActiveLink to="/">Home</ActiveLink>
       {location.pathname !== '/' && (
         <>

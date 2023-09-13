@@ -166,7 +166,7 @@ const ProductDetails = () => {
                   </select>
                 </div>
               </div>
-              <button role="button" type="button" disabled={!price} className="product-details__button" onClick={handleClick}>
+              <button aria-label="Add to cart" role="button" type="button" disabled={!price} className="product-details__button" onClick={handleClick}>
                 Add to cart
               </button>
             </form>
