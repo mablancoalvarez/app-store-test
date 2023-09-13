@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { URL_BASE, URL_POST } from '../api/api';
+import { URL_BASE, URL_POST } from '../services/api';
 import { useContext } from 'react';
 import { DataContext } from '../context/DataContext';
+import { LOCALSTORAGE_KEY } from '../utils/constants';
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -69,7 +70,7 @@ const ProductDetails = () => {
       });
       const data = await response.json();
 
-      const cartCountArray = JSON.parse(localStorage.getItem('cartCount')) || [];
+      const cartCountArray = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY)) || [];
       const existingItemIndex = cartCountArray.findIndex(
         (item) => item.id === id && item.color === colors && item.storage === storages
       );
@@ -87,7 +88,7 @@ const ProductDetails = () => {
         });
       }
 
-      localStorage.setItem('cartCount', JSON.stringify(cartCountArray));
+      localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(cartCountArray));
       setData(cartCountArray);
       setTimeout(
         () => {
@@ -142,31 +143,33 @@ const ProductDetails = () => {
           </ul>
           <hr className="product-details__separator"></hr>
           <div className="product-details__actions">
-            <div className="product-details__selectors">
-              <div className="product-details__selectors-content">
-                <p className="product-details__selectors-title">Color</p>
-                <select name="colors" className="color" value={colors} onChange={handleOnChange}>
-                  {product.options?.colors?.map((item) => (
-                    <option value={item.name} key={item.name}>
-                      {item.name}
-                    </option>
-                  ))}
-                </select>
+            <form>
+              <div className="product-details__selectors">
+                <div className="product-details__selectors-content">
+                  <p className="product-details__selectors-title">Color</p>
+                  <select name="colors" className="color" value={colors} onChange={handleOnChange}>
+                    {product.options?.colors?.map((item) => (
+                      <option value={item.name} key={item.name}>
+                        {item.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="product-details__selectors-content">
+                  <p className="product-details__selectors-title">Storage</p>
+                  <select name="storages" value={storages} onChange={handleOnChange}>
+                    {product.options?.storages?.map((item) => (
+                      <option value={item.name} key={item.name}>
+                        {item.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
-              <div className="product-details__selectors-content">
-                <p className="product-details__selectors-title">Storage</p>
-                <select name="storages" value={storages} onChange={handleOnChange}>
-                  {product.options?.storages?.map((item) => (
-                    <option value={item.name} key={item.name}>
-                      {item.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-            <button disabled={!price} className="product-details__button" onClick={handleClick}>
-              Add to cart
-            </button>
+              <button role="button" type="button" disabled={!price} className="product-details__button" onClick={handleClick}>
+                Add to cart
+              </button>
+            </form>
           </div>
         </div>
       </div>

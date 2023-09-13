@@ -1,4 +1,4 @@
-import { ReactComponent as Logo } from '../img/logo.svg';
+import { ReactComponent as Logo } from '../assets/logo.svg';
 import Breadcrumb from './Breadcrumb';
 import { ShoppingBag } from '@phosphor-icons/react';
 import { DataContext } from '../context/DataContext';

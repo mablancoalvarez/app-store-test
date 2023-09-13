@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { URL_BASE } from '../api/api';
+import { URL_BASE } from '../services/api';
 import { ArrowRight } from '@phosphor-icons/react';
+import { filterProducts } from '../utils/helpers';
 
 const ProductsList = () => {
   const [products, setProducts] = useState([]);
@@ -19,15 +20,9 @@ const ProductsList = () => {
     };
     fetchData();
   }, []);
-  const lowerCaseInputValue = inputValue.toLowerCase();
 
-  const filteredProducts = products.filter(
-    ({ brand, price, id, model }) =>
-      brand.toLowerCase().includes(lowerCaseInputValue) ||
-      price.toString().includes(lowerCaseInputValue) ||
-      id.toString().includes(lowerCaseInputValue) ||
-      model.toLowerCase().includes(lowerCaseInputValue)
-  );
+  const fieldsToSearch = ['brand', 'price', 'id', 'model'];
+  const filteredProducts = filterProducts(products, inputValue, fieldsToSearch);
 
   return (
     <main data-testid="products-list" className="products">
@@ -60,12 +55,14 @@ const ProductsList = () => {
                   <span className={`products__price ${unavailable}`}>
                     {price ? `${price}$` : 'Out of stock'}
                   </span>
-                  <button className="products__button">
-                    <NavLink to={`/product/${id}`}>
+                  <NavLink className="products__link" to={`/product/${id}`}>
+                    <button role="button" className="products__button">
+
                       View Details
                       <ArrowRight size={24} />
-                    </NavLink>
-                  </button>
+
+                    </button>
+                  </NavLink>
                 </div>
               </div>
             </li>
